@@ -3,6 +3,7 @@ import 'package:temp_project/custom_button.dart';
 import 'package:temp_project/custom_textformfield.dart';
 
 import 'custom_pagelayout.dart';
+import 'group_list_page.dart';
 import 'signup_page.dart';
 
 class LoginPage extends StatelessWidget {
@@ -28,7 +29,14 @@ class LoginPage extends StatelessWidget {
         SizedBox(height: 20),
         CustomTextFormField(labelText: 'Password'),
         SizedBox(height: 30),
-        CustomElevatedButton(text: 'ログイン', onPressed: onPressed),
+        CustomElevatedButton(
+            text: 'ログイン',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => GroupListPage()),
+              );
+            }),
         SizedBox(height: 30),
         CustomElevatedButton(
             text: '新規登録',
