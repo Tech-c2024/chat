@@ -3,6 +3,7 @@ import 'package:temp_project/custom_button.dart';
 import 'package:temp_project/custom_textformfield.dart';
 
 import 'custom_pagelayout.dart';
+import 'signup_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -29,7 +30,14 @@ class LoginPage extends StatelessWidget {
         SizedBox(height: 30),
         CustomElevatedButton(text: 'ログイン', onPressed: onPressed),
         SizedBox(height: 30),
-        CustomElevatedButton(text: '新規登録', onPressed: onPressed),
+        CustomElevatedButton(
+            text: '新規登録',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SignUpPage()),
+              );
+            }),
       ],
     );
   }
