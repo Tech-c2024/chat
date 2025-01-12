@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:temp_project/custom_button.dart';
+import 'package:temp_project/custom_textformfield.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -23,47 +25,13 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30),
-            Container(
-              width: 300,
-              child: TextFormField(
-                decoration: InputDecoration(
-                    labelText: 'Username', border: OutlineInputBorder()),
-              ),
-            ),
+            CustomTextFormField(labelText: 'Username'),
             SizedBox(height: 20),
-            Container(
-              width: 300,
-              child: TextFormField(
-                decoration: InputDecoration(
-                    labelText: 'Password', border: OutlineInputBorder()),
-              ),
-            ),
+            CustomTextFormField(labelText: 'Password'),
             SizedBox(height: 30),
-            ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.black,
-                  side: BorderSide(color: Colors.black, width: 0.5),
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero,
-                  ),
-                ),
-                child: Text('ログイン')),
+            CustomElevatedButton(text: 'ログイン', onPressed: onPressed),
             SizedBox(height: 30),
-            ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.black,
-                  side: BorderSide(color: Colors.black, width: 0.5),
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero,
-                  ),
-                ),
-                child: Text('新規登録')),
+            CustomElevatedButton(text: '新規登録', onPressed: onPressed)
           ],
         ),
       ),
