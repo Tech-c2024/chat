@@ -32,6 +32,10 @@ class GroupCreatePage extends StatelessWidget {
         ),
         SizedBox(height: 20),
         CustomTextFormField(labelText: '自分の目標'),
+        SizedBox(height: 10),
+        CustomTextFormField(),
+        SizedBox(height: 10),
+        CustomTextFormField(),
       ],
     );
   }

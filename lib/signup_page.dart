@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'custom_button.dart';
 import 'custom_pagelayout.dart';
 import 'custom_textformfield.dart';
-import 'group_create_page.dart';
 
 class SignUpPage extends StatelessWidget {
   @override
@@ -25,10 +24,7 @@ class SignUpPage extends StatelessWidget {
         CustomElevatedButton(
             text: '新規登録',
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => GroupCreatePage()),
-              );
+              print('新規登録が押されました');
             })
       ],
     );

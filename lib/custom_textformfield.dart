@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  final String labelText;
+  final String? labelText;
   final double width;
 
   const CustomTextFormField({
     Key? key,
-    required this.labelText,
+    this.labelText,
     this.width = 300,
   }) : super(key: key);
 
