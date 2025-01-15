@@ -56,3 +56,4 @@ ios/build/
 # Xcode関連の設定ファイル
 *.xcodeproj
 *.xcworkspace
+ios/Runner.xcworkspace/contents.xcworkspacedata
