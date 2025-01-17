@@ -58,3 +58,7 @@ ios/build/
 *.xcodeproj
 *.xcworkspace
 ios/Runner.xcworkspace/contents.xcworkspacedata
+
+# Firebase設定ファイル
+firebase.json
+*firebase_options.dart
