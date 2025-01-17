@@ -1,16 +1,46 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:temp_project/custom_button.dart';
-import 'package:temp_project/custom_textformfield.dart';
+import 'package:temp_project/group_list_page.dart';
 
+import 'custom_button.dart';
 import 'custom_pagelayout.dart';
-import 'group_list_page.dart';
+import 'custom_textformfield.dart';
 import 'signup_page.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
 
-  void onPressed() {
-    print('Button pressed');
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  String _errorMessage = '';
+
+  Future<void> _login() async {
+    setState(() {
+      _errorMessage = '';
+    });
+    try {
+      await _auth.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      print("ログインに成功しました");
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => GroupListPage()),
+      );
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        _errorMessage = e.message ?? "ログインに失敗しました";
+      });
+    } catch (e) {
+      setState(() {
+        _errorMessage = "予期しないエラーが発生しました: $e";
+      });
+    }
   }
 
   @override
@@ -25,18 +55,15 @@ class LoginPage extends StatelessWidget {
           ),
         ),
         SizedBox(height: 30),
-        CustomTextFormField(labelText: 'Username'),
+        CustomTextFormField(
+          labelText: 'E-mail',
+          controller: emailController,
+        ),
         SizedBox(height: 20),
-        CustomTextFormField(labelText: 'Password'),
+        CustomTextFormField(
+            controller: passwordController, labelText: 'Password'),
         SizedBox(height: 30),
-        CustomElevatedButton(
-            text: 'ログイン',
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => GroupListPage()),
-              );
-            }),
+        CustomElevatedButton(text: 'ログイン', onPressed: _login),
         SizedBox(height: 30),
         CustomElevatedButton(
             text: '新規登録',
