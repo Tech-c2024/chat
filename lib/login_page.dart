@@ -1,10 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:temp_project/group_list_page.dart';
 
 import 'custom_button.dart';
 import 'custom_pagelayout.dart';
 import 'custom_textformfield.dart';
+import 'group_main_page.dart';
 import 'signup_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -13,9 +14,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController emailOrUsernameController =
+      TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   String _errorMessage = '';
 
   Future<void> _login() async {
@@ -23,14 +26,38 @@ class _LoginPageState extends State<LoginPage> {
       _errorMessage = '';
     });
     try {
-      await _auth.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
+      String input = emailOrUsernameController.text.trim();
+      String password = passwordController.text.trim();
+
+      String email;
+      if (input.contains('@')) {
+        email = input;
+      } else {
+        final querySnapshot = await _firestore
+            .collection('users')
+            .where('username', isEqualTo: input)
+            .get();
+
+        if (querySnapshot.docs.isEmpty) {
+          throw FirebaseAuthException(
+            code: 'user-not-found',
+            message: 'ユーザーが見つかりません。',
+          );
+        }
+
+        email = querySnapshot.docs.first['email'];
+      }
+
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
       );
+
       print("ログインに成功しました");
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => GroupListPage()),
+        MaterialPageRoute(
+            builder: (context) => GroupMainPage(uid: userCredential.user!.uid)),
       );
     } on FirebaseAuthException catch (e) {
       setState(() {
@@ -56,8 +83,8 @@ class _LoginPageState extends State<LoginPage> {
         ),
         SizedBox(height: 30),
         CustomTextFormField(
-          labelText: 'E-mail',
-          controller: emailController,
+          labelText: 'Username or E-mail',
+          controller: emailOrUsernameController,
         ),
         SizedBox(height: 20),
         CustomTextFormField(
