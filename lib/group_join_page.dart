@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'custom_form.dart';
 import 'custom_pagelayout.dart';
-import 'custom_textformfield.dart';
 
 class GroupJoinPage extends StatelessWidget {
   @override
@@ -16,9 +16,9 @@ class GroupJoinPage extends StatelessWidget {
           ),
         ),
         SizedBox(height: 30),
-        CustomTextFormField(labelText: 'グループ名'),
+        CustomForm(labelText: 'グループ名'),
         SizedBox(height: 20),
-        CustomTextFormField(labelText: '招待コード'),
+        CustomForm(labelText: '招待コード'),
         SizedBox(height: 20),
         Divider(
           color: Colors.black,
@@ -27,11 +27,11 @@ class GroupJoinPage extends StatelessWidget {
           endIndent: 20,
         ),
         SizedBox(height: 20),
-        CustomTextFormField(labelText: '自分の目標'),
+        CustomForm(labelText: '自分の目標'),
         SizedBox(height: 10),
-        CustomTextFormField(),
+        CustomForm(),
         SizedBox(height: 10),
-        CustomTextFormField()
+        CustomForm()
       ],
     );
   }

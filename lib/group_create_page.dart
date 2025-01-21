@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'custom_form.dart';
 import 'custom_pagelayout.dart';
-import 'custom_textformfield.dart';
 
 class GroupCreatePage extends StatelessWidget {
   @override
@@ -16,13 +16,13 @@ class GroupCreatePage extends StatelessWidget {
           ),
         ),
         SizedBox(height: 30),
-        CustomTextFormField(labelText: 'グループ名'),
+        CustomForm(labelText: 'グループ名'),
         SizedBox(height: 20),
-        CustomTextFormField(labelText: '人数'),
+        CustomForm(labelText: '人数'),
         SizedBox(height: 20),
-        CustomTextFormField(labelText: '目標個数'),
+        CustomForm(labelText: '目標個数'),
         SizedBox(height: 20),
-        CustomTextFormField(labelText: '期限'),
+        CustomForm(labelText: '期限'),
         SizedBox(height: 20),
         Divider(
           color: Colors.black,
@@ -31,11 +31,11 @@ class GroupCreatePage extends StatelessWidget {
           endIndent: 20,
         ),
         SizedBox(height: 20),
-        CustomTextFormField(labelText: '自分の目標'),
+        CustomForm(labelText: '自分の目標'),
         SizedBox(height: 10),
-        CustomTextFormField(),
+        CustomForm(),
         SizedBox(height: 10),
-        CustomTextFormField(),
+        CustomForm(),
       ],
     );
   }

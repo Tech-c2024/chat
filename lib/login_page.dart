@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'custom_button.dart';
+import 'custom_form.dart';
 import 'custom_pagelayout.dart';
-import 'custom_textformfield.dart';
 import 'group_main_page.dart';
 import 'signup_page.dart';
 
@@ -82,13 +82,12 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
         SizedBox(height: 30),
-        CustomTextFormField(
+        CustomForm(
           labelText: 'Username or E-mail',
           controller: emailOrUsernameController,
         ),
         SizedBox(height: 20),
-        CustomTextFormField(
-            controller: passwordController, labelText: 'Password'),
+        CustomForm(controller: passwordController, labelText: 'Password'),
         SizedBox(height: 30),
         CustomElevatedButton(text: 'ログイン', onPressed: _login),
         SizedBox(height: 30),

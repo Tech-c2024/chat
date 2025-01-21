@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'custom_button.dart';
+import 'custom_form.dart';
 import 'custom_pagelayout.dart';
-import 'custom_textformfield.dart';
 import 'login_page.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -66,19 +66,43 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
         SizedBox(height: 30),
-        CustomTextFormField(
-          controller: usernameController,
-          labelText: 'username',
+        Form(
+          child: CustomForm(
+            controller: usernameController,
+            labelText: 'username',
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'ユーザー名を入力してください';
+              }
+              if (RegExp(r'[^a-zA-Z0-9_]+').hasMatch(value)) {
+                return 'ユーザー名は半角英数字と_のみ使用できます';
+              }
+              return null;
+            },
+          ),
         ),
         SizedBox(height: 20),
-        CustomTextFormField(
+        CustomForm(
           controller: emailController,
           labelText: 'E-mail',
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'メールアドレスを入力してください';
+            }
+            if (RegExp(r"[^a-zA-z0-9_@.-]").hasMatch(value)) {
+              return '正しいメールアドレスを入力してください';
+            }
+          },
         ),
         SizedBox(height: 20),
-        CustomTextFormField(
+        CustomForm(
           controller: passwordController,
           labelText: 'Password',
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'パスワードを入力してください';
+            }
+          },
         ),
         SizedBox(height: 20),
         CustomElevatedButton(text: '新規登録', onPressed: _signUp),
