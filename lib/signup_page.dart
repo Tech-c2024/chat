@@ -66,20 +66,18 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
         SizedBox(height: 30),
-        Form(
-          child: CustomForm(
-            controller: usernameController,
-            labelText: 'username',
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'ユーザー名を入力してください';
-              }
-              if (RegExp(r'[^a-zA-Z0-9_]+').hasMatch(value)) {
-                return 'ユーザー名は半角英数字と_のみ使用できます';
-              }
-              return null;
-            },
-          ),
+        CustomForm(
+          controller: usernameController,
+          labelText: 'username',
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'ユーザー名を入力してください';
+            }
+            if (RegExp(r'[^a-zA-Z0-9_]+').hasMatch(value)) {
+              return 'ユーザー名は半角英数字と_のみ使用できます';
+            }
+            return null;
+          },
         ),
         SizedBox(height: 20),
         CustomForm(
