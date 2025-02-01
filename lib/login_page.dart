@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'custom_button.dart';
 import 'custom_form.dart';
 import 'custom_pagelayout.dart';
-import 'group_main_page.dart';
+import 'group_list_page.dart';
 import 'signup_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -56,8 +56,7 @@ class _LoginPageState extends State<LoginPage> {
       print("ログインに成功しました");
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-            builder: (context) => GroupMainPage(uid: userCredential.user!.uid)),
+        MaterialPageRoute(builder: (context) => GroupListPage()),
       );
     } on FirebaseAuthException catch (e) {
       setState(() {
