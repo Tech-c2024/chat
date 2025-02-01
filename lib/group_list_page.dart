@@ -7,6 +7,7 @@ import 'custom_pagelayout.dart';
 import 'group_chat_page.dart';
 import 'group_create_page.dart';
 import 'group_join_page.dart';
+import 'login_page.dart';
 
 class GroupListPage extends StatefulWidget {
   @override
@@ -67,6 +68,26 @@ class _GroupListPageState extends State<GroupListPage> {
       });
     } catch (e) {
       print("エラー: ${e.toString()}");
+    }
+  }
+
+  //
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<void> _logout(BuildContext context) async {
+    try {
+      await _auth.signOut(); // Firebase ログアウト
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => LoginPage()), //ログアウトの後、ログインページに移動
+      );
+    } catch (e) {
+      print("ログアウトに失敗しました: $e");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('ログアウトに失敗しました: $e'),
+        backgroundColor: Colors.black,
+      ));
     }
   }
 
@@ -147,7 +168,22 @@ class _GroupListPageState extends State<GroupListPage> {
                     ),
                   ),
           ],
-        )
+        ),
+        SizedBox(height: 30),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.white,
+            padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+          ),
+          onPressed: () => _logout(context),
+          child: Text(
+            'ログアウト',
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+            ),
+          ),
+        ),
       ],
     );
   }
